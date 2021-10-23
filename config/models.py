@@ -9,7 +9,7 @@ class BaseModel(models.Model):
   )
 
   def __str__(self):
-    pass
+    return ""
 
   class Meta:
     abstract = True
