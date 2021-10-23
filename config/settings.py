@@ -31,10 +31,12 @@ DEFAULT_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'inflection',
 ]
 
 PROJECT_APPS = [
     'user',
+    'api.word'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS
