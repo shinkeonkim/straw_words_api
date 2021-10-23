@@ -21,8 +21,7 @@ services:
       args:
         PORT: ${PORT}
     command: > 
-      sh -c "python wait_for_postgres.py &&
-            ./manage.py makemigrations --noinput &&
+      sh -c "./manage.py makemigrations --noinput &&
             ./manage.py migrate &&
             ./manage.py collectstatic  --noinput &&
             ./manage.py runserver 0.0.0.0:${PORT} --insecure"

@@ -12,5 +12,6 @@ class BaseModel(models.Model):
     pass
 
   class Meta:
+    abstract = True
     verbose_name = 'BaseModel'
     verbose_name_plural = 'BaseModels'
