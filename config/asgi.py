@@ -1,5 +1,5 @@
 """
-ASGI config for straw_word_api project.
+ASGI config for straw_words_api project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
