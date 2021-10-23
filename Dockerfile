@@ -6,7 +6,7 @@ ENV PYTHONUNBU FFERED 1
 RUN apt-get install libpq-dev
 RUN pip install --upgrade pip
 COPY requirements.txt .
-RUN pip wheel -w /root/wheels -r requirements.txt
+RUN pip wheel -w /root/wheels  --no-cache-dir -r requirements.txt
 
 FROM python:3 as builder
 ENV PYTHONUNBU FFERED 1
