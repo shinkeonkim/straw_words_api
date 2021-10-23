@@ -7,35 +7,43 @@ from config.models import BaseModel
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, nickname=""):
-        if not email:
-            raise ValueError(_('Users must have an email address'))
+  def create_user(self, email, password, nickname):
+    if not email:
+      raise ValueError(_('Users must have an email address'))
 
-        user = self.model(
-            email=self.normalize_email(email),
-            nickname=nickname,
-        )
-        user.set_password(password)
-        user.save()
+    if not nickname:
+      raise ValueError(_('Users must have an nickname'))
 
-        return user
+    user = self.model(
+      email=self.normalize_email(email),
+      nickname=nickname,
+    )
+    user.set_password(password)
+    user.save()
 
-    def create_superuser(self, email, password):
-        user = self.create_user(
-            email=email,
-            password=password,
-        )
+    return user
 
-        user.is_superuser = True
-        user.save()
+  def create_superuser(self, email, nickname, password):
+    user = self.create_user(
+      email=email,
+      nickname=nickname,
+      password=password,
+    )
 
-        return user
+    user.is_superuser = True
+    user.save()
+
+    return user
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
-  USERNAME_FIELD = 'username'
+  class Meta:
+    verbose_name = 'User'
+    verbose_name_plural = 'Users'
 
-  username = models.CharField(
+  USERNAME_FIELD = 'nickname'
+
+  nickname = models.CharField(
     null=False,
     max_length=20,
     unique=True,
@@ -43,3 +51,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
   email = models.EmailField()
 
   objects = UserManager()
+  REQUIRED_FIELDS = ['email'] 
+
+  @property
+  def is_staff(self):
+    return self.is_superuser
