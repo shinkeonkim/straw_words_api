@@ -17,13 +17,13 @@ POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
 ALLOWED_HOSTS = [DEPLOY_URL, '127.0.0.1']
 
 DEFAULT_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
@@ -105,6 +105,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SITE_ID = 1
 
 # Internationalization
 LANGUAGE_CODE = "ko-kr"
