@@ -1,8 +1,10 @@
-from django.urls import path, include
+"""Module for url settings of user app"""
 
-app_name = 'user'
+from django.urls import include, path
+
+app_name = "user"
 
 urlpatterns = [
-    path('', include('dj_rest_auth.urls')),
-    path('', include('dj_rest_auth.registration.urls')),
+    path("", include("dj_rest_auth.urls")),
+    path("", include("dj_rest_auth.registration.urls")),
 ]

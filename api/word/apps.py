@@ -1,5 +1,9 @@
+"""Module for app configs of word app"""
+
 from django.apps import AppConfig
 
 
 class ApiConfig(AppConfig):
-    name = 'api.word'
+    """AppConfig definition for ApiConfig."""
+
+    name = "api.word"

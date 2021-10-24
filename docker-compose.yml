@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
       args:
         PORT: ${PORT}
-    command: > 
+    command: >
       sh -c "./manage.py makemigrations --noinput &&
             ./manage.py migrate &&
             ./manage.py collectstatic  --noinput &&

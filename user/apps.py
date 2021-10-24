@@ -1,5 +1,8 @@
+"""Module for app configs of user app"""
 from django.apps import AppConfig
 
 
 class UserConfig(AppConfig):
-    name = 'user'
+    """AppConfig definition for UserConfig."""
+
+    name = "user"

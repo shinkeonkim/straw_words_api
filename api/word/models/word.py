@@ -1,28 +1,38 @@
+"""Module for word model"""
+
 from django.db import models
-from config.models import BaseModel
+from django.db.models.query import QuerySet
 from inflection import underscore
 
-class WordManager(models.Manager):
-  use_for_related_fields = True
+from config.models import BaseModel
 
-  def get_queryset(self):
-    return super().get_queryset().filter(lanh=underscore(self.model.__name__))
+
+class WordManager(models.Manager):
+    """ModelManger definition for Word."""
+
+    use_for_related_fields = True
+
+    def get_queryset(self) -> QuerySet:
+        """Return Default Word Model QuerySet"""
+        return super().get_queryset().filter(lanh=underscore(self.model.__name__))
 
 
 class Word(BaseModel):
-  class Meta:
-    managed = True
-    db_table = 'words'
-    verbose_name = 'Word'
-    verbose_name_plural = 'Words'
+    """Model definition for Word."""
 
-  content = models.TextField(
-    verbose_name="단어 내용"
-  )
-  type = models.CharField(
-    verbose_name='언어',
-    max_length=10,
-    blank=True,
-    null=True,
-    default='korean_word',
-  )
+    class Meta:
+        """Meta definition for Word."""
+
+        managed = True
+        db_table = "words"
+        verbose_name = "Word"
+        verbose_name_plural = "Words"
+
+    content = models.TextField(verbose_name="단어 내용")
+    type = models.CharField(
+        verbose_name="언어",
+        max_length=10,
+        blank=True,
+        null=True,
+        default="korean_word",
+    )

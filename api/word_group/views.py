@@ -1,3 +1,1 @@
-from django.shortcuts import render
-
-# Create your views here.
+"""Module for Views of word_group app"""

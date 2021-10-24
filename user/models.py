@@ -1,5 +1,7 @@
-from django.contrib.auth.models import (AbstractBaseUser, AbstractUser,
-                                        BaseUserManager, PermissionsMixin)
+"""Module for models of user app"""
+
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -7,54 +9,65 @@ from config.models import BaseModel
 
 
 class UserManager(BaseUserManager):
-  def create_user(self, email, password, nickname):
-    if not email:
-      raise ValueError(_('Users must have an email address'))
+    """ModelManger definition for User."""
 
-    if not nickname:
-      raise ValueError(_('Users must have an nickname'))
+    def create_user(self, email, nickname, password):
+        """Create new user"""
+        if not email:
+            raise ValueError(_("Users must have an email address"))
 
-    user = self.model(
-      email=self.normalize_email(email),
-      nickname=nickname,
-    )
-    user.set_password(password)
-    user.save()
+        if not nickname:
+            raise ValueError(_("Users must have an nickname"))
 
-    return user
+        user = self.model(
+            email=self.normalize_email(email),
+            nickname=nickname,
+        )
+        user.set_password(password)
+        user.save()
 
-  def create_superuser(self, email, nickname, password):
-    user = self.create_user(
-      email=email,
-      nickname=nickname,
-      password=password,
-    )
+        return user
 
-    user.is_superuser = True
-    user.save()
+    def create_superuser(self, email, nickname, password):
+        """Create new admin user"""
+        user = self.create_user(
+            email=email,
+            nickname=nickname,
+            password=password,
+        )
 
-    return user
+        user.is_superuser = True
+        user.save()
+
+        return user
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
-  class Meta:
-    managed = True
-    db_table = 'users'
-    verbose_name = 'User'
-    verbose_name_plural = 'Users'
+    """Model definition for User."""
 
-  USERNAME_FIELD = 'nickname'
+    class Meta:
+        """Meta definition for User."""
 
-  nickname = models.CharField(
-    null=False,
-    max_length=20,
-    unique=True,
-  )
-  email = models.EmailField()
+        managed = True
+        db_table = "users"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
-  objects = UserManager()
-  REQUIRED_FIELDS = ['email'] 
+    USERNAME_FIELD = "nickname"
 
-  @property
-  def is_staff(self):
-    return self.is_superuser
+    nickname = models.CharField(
+        null=False,
+        max_length=20,
+        unique=True,
+    )
+    email = models.EmailField()
+
+    objects = UserManager()
+    REQUIRED_FIELDS = ["email"]
+
+    @property
+    def is_staff(self):
+        """Return whether the user is staff
+        - used to admin site
+        """
+        return self.is_superuser
