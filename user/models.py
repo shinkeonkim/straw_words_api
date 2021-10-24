@@ -38,6 +38,8 @@ class UserManager(BaseUserManager):
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
   class Meta:
+    managed = True
+    db_table = 'users'
     verbose_name = 'User'
     verbose_name_plural = 'Users'
 
