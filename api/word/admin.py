@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Word, KoreanWord, EnglishWord
+from .models.word import Word
+from .models.korean_word import KoreanWord
+from .models.english_word import EnglishWord
 
 @admin.register(Word)
 class WordAdmin(admin.ModelAdmin):
