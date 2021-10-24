@@ -36,7 +36,8 @@ DEFAULT_APPS = [
 
 PROJECT_APPS = [
     'user',
-    'api.word'
+    'api.word',
+    'api.word_group',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS
