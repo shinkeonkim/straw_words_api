@@ -1,5 +1,11 @@
 # straw_words_api
 
+## Introduce
+Vocabulary API developed using Django
+
+- Using the Naver Papago Translation API.
+- Using django rest-frame-work.
+
 ## Dev
 ### How to write env
 ```
